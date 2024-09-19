@@ -4,7 +4,7 @@ export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-    const [cartPage, setCartPage] = useState(true);
+    const [cartPage, setCartPage] = useState(false);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,9 +17,10 @@ const CartProvider = ({ children }) => {
         setCartPage(true);
     }
 
+    function handleShowProductsPage() {
+        setCartPage(false);
+    }
 
-
-    console.log(cart);
 
     useEffect(() => {
         const fetchCartData = async () => {
@@ -41,7 +42,7 @@ const CartProvider = ({ children }) => {
     }, []);
 
     return (
-        <CartContext.Provider value={{ products, loading, error, handleAddToCart, handleShowCart, cartPage, cart }}>
+        <CartContext.Provider value={{ products, loading, error, handleAddToCart, handleShowCart, cartPage, cart, handleShowProductsPage, loading }}>
             {children}
         </CartContext.Provider>
     );

@@ -1,13 +1,10 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
-// Example product array, replace this with your actual data source
 
 function ProductCard() {
     const { products } = useContext(CartContext);
-    const { handleAddToCart } = useContext(CartContext);
-    console.log(products);
-
+    const { handleAddToCart, loading } = useContext(CartContext);
 
     function handleClickCart(product) {
         handleAddToCart(product);
@@ -15,7 +12,7 @@ function ProductCard() {
 
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {products.map((product) => (
+            {loading ? <h1 className="col-span-full text-center">Loading...</h1> : products.map((product) => (
                 <div
                     key={product.id}
                     className="bg-white border border-gray-200 rounded-lg flex flex-col p-3 transition-transform duration-200 hover:transform hover:-translate-y-1 hover:shadow-sm"
